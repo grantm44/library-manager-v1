@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  nav
+    ul
+      li
+        a(href='all_books.html') Books
+      li
+        a(href='all_patrons.html') Patrons
+      li
+        a(href='all_loans.html') Loans
+  body
+    h1 Patron: Return Book  
+    p
+      strong Book Title:
+      |  #{data.book.title}
+    p
+      strong Loaned By:
+      |  #{data.patron.fullName()}
+    p
+      strong Loaned On:
+      |  #{data.loan.loaned_on}
+    p
+      strong Return By:
+      |  #{data.loan.return_by}
+    form(method="post")
+      p
+        label(for='returned_on') Returned on:
+        input#returned_on(type='text', name='date', value= moment().format('YYYY-MM-DD'))
+      p 
+        input(type='submit', value= 'Return Book')
+  
+

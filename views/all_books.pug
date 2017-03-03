@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  nav
+    ul
+      li
+        a(href='/books/all') Books
+      li
+        a(href='/patrons/all') Patrons
+      li
+        a(href='/loans/all') Loans
+  body
+    h1 Books
+    p
+      a.button(href='/books/new') Create New Book
+    p
+      | Filters 
+      a(href='/books/all') All
+      |  | 
+      a(href='/books/overdue') Overdue
+      |  | 
+      a(href='/books/checked_out') Checked Out
+    table
+      thead
+        tr
+          th Title
+          th Author
+          th Genre
+          th Year Released
+      tbody
+        each book in books
+          tr
+            td
+              a(href='/books/details/' + book.id) #{book.title}<!-- title -->
+            td #{book.author}             <!-- author -->
+            td #{book.genre} 
+            td #{book.first_published}
+
+  

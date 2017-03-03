@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  nav
+    ul
+      li
+        a(href='all_books.html') Books
+      li
+        a(href='all_patrons.html') Patrons
+      li
+        a(href='all_loans.html') Loans
+  body
+    h1 Book: #{title}
+    form
+      p
+        label(for='title') Title
+        input#title(type='text', value= title)
+      p
+        label(for='author') Author
+        input#author(type='text', value= data.author)
+      p
+        label(for='genre') Genre
+        input#genre(type='text', value= data.genre)
+      p
+        label(for='first_published') First Published
+        input#first_published(type='text', value= data.first_published)
+      p
+        input(type='submit', value='Update')
+    h2 Loan History
+    table
+      thead
+        tr
+          th Book
+          th Patron
+          th Loaned on
+          th Return by
+          th Returned on
+          th Action
+      tbody
+        each loan in data.Loans
+          tr
+            td
+              a(href=loan.book_id) #{title}
+            td
+              a(href='patron_detail.html') #{loan.Patron.fullName()}
+            td #{loan.loaned_on}
+            td #{loan.return_by}
+            td #{loan.returned_on}
+            td
+              a.button(href='/loans/return/'+ loan.id) Return Book
