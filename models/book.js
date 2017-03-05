@@ -2,8 +2,22 @@
 module.exports = function(sequelize, DataTypes) {
   var Book = sequelize.define('Book', {
     //id: {type: DataTypes.INTEGER, primaryKey: true},
-    title: DataTypes.STRING,
-    author: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Please enter a title"
+        }
+      }
+    }, 
+    author: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Please enter author"
+        }
+      }
+    },
     genre: DataTypes.STRING,
     first_published: DataTypes.INTEGER
   }, {

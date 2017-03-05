@@ -4,13 +4,14 @@ block content
   nav
     ul
       li
-        a(href='all_books.html') Books
+        a(href='/books/all') Books
       li
-        a(href='all_patrons.html') Patrons
+        a(href='/patrons/all') Patrons
       li
-        a(href='all_loans.html') Loans
+        a(href='/loans/all') Loans
   body
     h1 New Book
+    include errors
     form(method="post")
       p
         label(for='title') Title

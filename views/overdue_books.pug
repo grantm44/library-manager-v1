@@ -4,22 +4,22 @@ block content
   nav
     ul
       li
-        a(href='all_books.html') Books
+        a(href='/books/all') Books
       li
-        a(href='all_patrons.html') Patrons
+        a(href='/patrons/all') Patrons
       li
-        a(href='all_loans.html') Loans
+        a(href='/loans/all') Loans
   body
     h1 Overdue Books
     p
       a.button(href='new_book.html') Create New Book
     p
       | Filters 
-      a(href='all_books.html') All
+      a(href='/books/all') All
       |  | 
-      a(href='overdue_books.html') Overdue
+      a(href='/books/overdue') Overdue
       |  | 
-      a(href='checked_books.html') Checked Out
+      a(href='/books/checked_out') Checked Out
     table
       thead
         tr

@@ -23,7 +23,6 @@ router.get('/new', function(req,res,next){
         books : books,
         patrons : patrons
       }
-      //console.log(data);
       res.render('new_loan', {data: data, loan: Loan.build()});
     });
   });
@@ -31,11 +30,23 @@ router.get('/new', function(req,res,next){
   
   //save loan in database
   router.post('/new', function(req, res, next){
-      console.log(req.body);
     Loan.create(req.body).then(function(loan){
       //console.log(loan);
     }).catch(function(err){
-      console.log(err);
+      if(err.name === 'SequelizeValidationError'){
+        Book.findAll().then(function(books){
+          Patron.findAll().then(function(patrons){
+            var data = {
+              books : books,
+              patrons : patrons
+            }
+            res.render('new_loan', {
+              data: data, 
+              errors: err.errors,
+              loan: Loan.build()});
+          });
+        });
+      }
     });
   });
   

@@ -3,8 +3,22 @@ module.exports = function(sequelize, DataTypes) {
   var Loan = sequelize.define('Loan', {
     book_id: DataTypes.INTEGER,
     patron_id: DataTypes.INTEGER,
-    loaned_on: DataTypes.DATEONLY,
-    return_by: DataTypes.DATEONLY,
+    loaned_on: {
+      type: DataTypes.DATEONLY,
+      validate: { 
+        isDate: {
+          msg: 'Must enter date of loan'
+        }
+      }
+    },
+    return_by: {
+      type: DataTypes.DATEONLY,
+      validate: {
+        isDate: {
+          msg: 'Must enter due date'
+        }
+      }
+    },
     returned_on: DataTypes.DATEONLY
   }, {
     timestamps: false,
@@ -13,14 +27,6 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
         Loan.belongsTo(models.Book, {foreignKey: 'book_id'});
         Loan.belongsTo(models.Patron, {foreignKey: 'patron_id'});
-      }
-    },
-    instanceMethods: {
-      returnBook : function(date){
-        //console.log(value);
-        //var date = document.getElementById('returned_on').value;
-       
-        console.log(date);
       }
     }
   });
