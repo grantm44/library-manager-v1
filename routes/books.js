@@ -31,6 +31,25 @@ router.get('/details/:id', function(req,res,next){
       })
   });
 
+/*function bookDetails(id){
+  Book.findById(id, 
+    {include: [{model: Loan, 
+      include: [{model: Patron}] }]}).then(
+      function(data){
+        res.render('book_details', {
+          data: data, 
+          title: data.title,
+          errors: err.errors });
+      })
+}*/
+
+router.post('/details/:id', function(req, res, next){
+  Book.findById(req.params.id).then(function(book){
+    book.update(req.body, {validate: true});
+    res.redirect('/books/all');
+  })
+});
+
 router.get('/overdue', function(req,res,next){
   var date = moment().format('YYYY-MM-DD');
   Loan.findAll({

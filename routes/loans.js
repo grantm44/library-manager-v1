@@ -31,6 +31,7 @@ router.get('/new', function(req,res,next){
   //save loan in database
   router.post('/new', function(req, res, next){
     Loan.create(req.body).then(function(loan){
+      res.redirect('/loans/all');
       //console.log(loan);
     }).catch(function(err){
       if(err.name === 'SequelizeValidationError'){
@@ -43,7 +44,8 @@ router.get('/new', function(req,res,next){
             res.render('new_loan', {
               data: data, 
               errors: err.errors,
-              loan: Loan.build()});
+              loan: Loan.build()
+            });
           });
         });
       }

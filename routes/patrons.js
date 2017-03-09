@@ -41,8 +41,8 @@ router.post('/detail/:id', function(req,res,next){
     if(patron){
       patron.update(req.body);
     }
+    res.redirect('/patrons/all');
   })
-  //Patron.update()
-})
+});
 
 module.exports = router;
